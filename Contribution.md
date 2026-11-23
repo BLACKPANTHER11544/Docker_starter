@@ -47,6 +47,10 @@ manual_steps:
   title: Generate Prisma Client
   command: "npx prisma generate"
 
+- step: 11
+  title: App Scripts (package.json)
+  Command: "build" : "tsc -b" , "start" : "node dist/index.js" , "dev": "tsc -b && node dist/index.js"
+
 # Docker installation
 
 docker_steps:
@@ -73,3 +77,7 @@ docker_steps:
 - step: 5
   title: Run the Node.js project Docker container
   command: "docker run -d -p 8080:8080 --network <network_name> --env-file ./src/.env node_project:latest"
+
+- step: 6
+  title: Migrate db
+  commnd: "docker exec -it sh <container_name> npx prisma db push --schema=<src/prisma/schema.prisma>"
